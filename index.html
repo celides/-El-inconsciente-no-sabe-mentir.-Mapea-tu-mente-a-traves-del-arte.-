@@ -3,43 +3,280 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Método Celidiano | Adriana Ayala Gutiérrez</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
-        body { 
-            background: url('https://www.transparenttextures.com/patterns/black-marble.png'), #050505; 
-            color: #e0e0e0; font-family: 'Montserrat', sans-serif; margin: 0; padding: 20px; text-align: center; 
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
-        .hero { padding: 40px 0; border-bottom: 1px solid #c5a059; }
-        h1 { font-family: 'Playfair Display', serif; color: #c5a059; font-size: 2rem; margin-bottom: 10px; }
-        .card { background: rgba(20, 20, 20, 0.8); border: 1px solid #333; padding: 30px; border-radius: 15px; margin: 20px 0; backdrop-filter: blur(10px); }
-        .precio-ancla { text-decoration: line-through; color: #777; }
-        .precio-final { font-size: 2rem; color: #c5a059; font-weight: bold; }
-        .btn { display: block; padding: 20px; text-decoration: none; border-radius: 50px; margin: 15px 0; font-weight: bold; text-transform: uppercase; }
-        .btn-gold { background: linear-gradient(to right, #c5a059, #e6c880); color: #000; }
-        .btn-silver { background: #333; color: #fff; }
-        .info-banco { font-size: 0.9rem; color: #aaa; margin-top: 20px; padding: 15px; border: 1px dashed #555; }
+        body {
+            background-color: #050505;
+            background-image: url('https://www.transparenttextures.com/patterns/black-marble.png');
+            background-blend-mode: overlay;
+            font-family: 'Inter', sans-serif;
+            color: #e0e0e0;
+            line-height: 1.6;
+            padding: 20px 16px 120px;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        /* Tipografía */
+        h1, h2, h3 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 400;
+            letter-spacing: 0.02em;
+        }
+        h1 {
+            font-size: 2.2rem;
+            color: #c5a059;
+            text-align: center;
+            margin-bottom: 4px;
+            font-weight: 700;
+        }
+        .subtitle {
+            text-align: center;
+            font-size: 1rem;
+            color: #b0b0b0;
+            font-weight: 300;
+            letter-spacing: 2px;
+            margin-bottom: 24px;
+            font-family: 'Inter', sans-serif;
+            text-transform: uppercase;
+        }
+        /* Video miniatura */
+        .video-card {
+            background: rgba(255, 255, 255, 0.06);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-radius: 20px;
+            padding: 12px;
+            margin-bottom: 32px;
+            border: 1px solid rgba(197, 160, 89, 0.15);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.6);
+        }
+        .video-wrapper {
+            border-radius: 14px;
+            overflow: hidden;
+            position: relative;
+            cursor: pointer;
+        }
+        .video-wrapper img {
+            width: 100%;
+            display: block;
+            border-radius: 14px;
+        }
+        .play-icon {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 64px;
+            height: 64px;
+            background: rgba(197, 160, 89, 0.85);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(4px);
+            transition: transform 0.3s ease;
+        }
+        .play-icon svg {
+            width: 28px;
+            height: 28px;
+            fill: #050505;
+            margin-left: 4px;
+        }
+        .video-wrapper:hover .play-icon {
+            transform: translate(-50%, -50%) scale(1.08);
+        }
+        /* Tarjetas de servicio */
+        .card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border-radius: 20px;
+            padding: 24px 20px;
+            margin-bottom: 20px;
+            border: 1px solid rgba(197, 160, 89, 0.12);
+            box-shadow: 0 6px 24px rgba(0,0,0,0.4);
+            transition: transform 0.2s ease;
+        }
+        .card:hover {
+            transform: translateY(-2px);
+        }
+        .card h3 {
+            font-size: 1.4rem;
+            color: #c5a059;
+            margin-bottom: 8px;
+        }
+        .card .price-old {
+            font-size: 1.1rem;
+            color: #888;
+            text-decoration: line-through;
+            margin-right: 12px;
+        }
+        .card .price-final {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: #fff;
+        }
+        .card .price-final span {
+            font-size: 1rem;
+            font-weight: 300;
+            color: #b0b0b0;
+        }
+        .card-desc {
+            font-size: 0.95rem;
+            color: #ccc;
+            margin: 12px 0 20px;
+            border-left: 2px solid #c5a059;
+            padding-left: 14px;
+        }
+        /* Botones */
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 16px;
+            border: none;
+            border-radius: 14px;
+            font-size: 1.05rem;
+            font-weight: 500;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+            font-family: 'Inter', sans-serif;
+        }
+        .btn-plata {
+            background: linear-gradient(145deg, #d4d4d4, #b0b0b0);
+            color: #111;
+            box-shadow: 0 4px 20px rgba(180, 180, 180, 0.15);
+        }
+        .btn-plata:hover {
+            transform: scale(1.02);
+            box-shadow: 0 6px 28px rgba(180, 180, 180, 0.25);
+        }
+        .btn-oro {
+            background: linear-gradient(145deg, #c5a059, #a8853e);
+            color: #050505;
+            box-shadow: 0 4px 24px rgba(197, 160, 89, 0.25);
+        }
+        .btn-oro:hover {
+            transform: scale(1.02);
+            box-shadow: 0 6px 32px rgba(197, 160, 89, 0.4);
+        }
+        /* Sección fija de pagos */
+        .payment-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(5, 5, 5, 0.92);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            border-top: 1px solid rgba(197, 160, 89, 0.2);
+            padding: 14px 16px 20px;
+            box-shadow: 0 -8px 30px rgba(0,0,0,0.8);
+            font-size: 0.85rem;
+            text-align: center;
+            z-index: 100;
+        }
+        .payment-bar strong {
+            color: #c5a059;
+        }
+        .payment-bar .bank {
+            font-weight: 300;
+            color: #aaa;
+            letter-spacing: 1px;
+        }
+        .payment-bar .clabe {
+            font-family: 'Inter', monospace;
+            color: #fff;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            background: rgba(197, 160, 89, 0.1);
+            padding: 4px 12px;
+            border-radius: 8px;
+            display: inline-block;
+            margin-top: 4px;
+        }
+        /* Recursos visuales ocultos (para referencia) */
+        .hidden-assets {
+            display: none;
+        }
+        /* Ajustes mobile */
+        @media (max-width: 480px) {
+            h1 { font-size: 1.8rem; }
+            .card { padding: 18px 14px; }
+            .payment-bar { font-size: 0.75rem; padding: 10px 12px 16px; }
+        }
     </style>
 </head>
 <body>
-    <div class="hero">
-        <h1>MÉTODO CELIDIANO</h1>
-        <p>Adriana Ayala Gutiérrez</p>
+
+<div class="container">
+
+    <!-- Encabezado -->
+    <h1>MÉTODO CELIDIANO</h1>
+    <div class="subtitle">Adriana Ayala Gutiérrez</div>
+
+    <!-- Video (miniatura con play) -->
+    <div class="video-card">
+        <div class="video-wrapper" onclick="window.open('https://youtu.be/_HDMR7s3xO8', '_blank')">
+            <img src="https://drive.google.com/uc?id=1HANGnoK1uaHFsYVtTesuy0Lqh0rGaa7O" alt="Video Método Celidiano">
+            <div class="play-icon">
+                <svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
+            </div>
+        </div>
     </div>
+
+    <!-- Nivel Estándar -->
     <div class="card">
-        <img src="https://drive.google.com/uc?id=1HANGnoK1uaHFsYVtTesuy0Lqh0rGaa7O" style="width:100%; border-radius:10px;">
+        <h3>Nivel Estándar</h3>
+        <div>
+            <span class="price-old">$3,800</span>
+            <span class="price-final">$1,999 <span>MXN</span></span>
+        </div>
+        <div class="card-desc">
+            Sesión individual · Metodología base · Material digital incluido.
+        </div>
+        <a href="#" class="btn btn-plata">Acceder al formulario</a>
+        <!-- CAMBIAR LINK: INSERTAR LINK DE GOOGLE FORM AQUÍ -->
     </div>
+
+    <!-- Nivel Privado Premium -->
     <div class="card">
-        <p class="precio-ancla">$3,800 MXN</p>
-        <p class="precio-final">$1,999 MXN</p>
-        <a href="URL_GOOGLE_FORM" class="btn btn-silver">Nivel Estándar</a>
-        <hr style="border:0; border-top:1px solid #333; margin:20px 0;">
-        <p class="precio-ancla">$10,000 MXN</p>
-        <p class="precio-final">$3,799 MXN</p>
-        <a href="https://wa.me/524494008788" class="btn btn-gold">Privado Premium</a>
+        <h3>Nivel Privado Premium</h3>
+        <div>
+            <span class="price-old">$10,000</span>
+            <span class="price-final">$3,799 <span>MXN</span></span>
+        </div>
+        <div class="card-desc">
+            Sesión 1 a 1 · Confidencialidad total · Guía personalizada · Acceso a comunidad.
+        </div>
+        <a href="https://wa.me/524494008788" target="_blank" class="btn btn-oro">Reservar por WhatsApp</a>
     </div>
-    <div class="info-banco">
-        Pago vía NU<br>
-        <strong>Adriana Ayala Gutiérrez</strong><br>
-        CLABE: 5101259167856037
+
+    <!-- Recursos visuales (solo referencia, no se muestran) -->
+    <div class="hidden-assets">
+        <img src="https://drive.google.com/uc?id=1qzrBx825mGt7gjyzmOTA4nuqJrTd4eRa" alt="Arte Decodificación">
+        <img src="https://drive.google.com/uc?id=1qzrBx825mGt7gjyzmOTA4nuqJrTd4eRa" alt="Mapeo Neurovisual">
     </div>
+
+</div>
+
+<!-- Barra fija de pagos -->
+<div class="payment-bar">
+    <div><strong>Banco NU</strong> · Titular: Adriana Ayala Gutiérrez</div>
+    <div class="clabe">CLABE: 5101259167856037</div>
+    <div style="font-size:0.7rem; color:#666; margin-top:6px;">Transferencia bancaria · Una vez realizado, envía comprobante a WhatsApp</div>
+</div>
+
 </body>
 </html>
